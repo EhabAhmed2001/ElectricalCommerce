@@ -1,0 +1,217 @@
+/* Main Auth Container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Form Styling */
+.auth-form {
+  width: 100%;
+  max-width: 360px;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-title {
+  text-align: center;
+  color: #666;
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.form-subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+
+/* Form Groups */
+.form-group {
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Input Fields */
+.form-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: all 0.3s;
+  box-sizing: border-box;
+
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #666;
+  box-shadow: 0 0 0 2px rgba(113, 127, 224, 0.2);
+}
+
+.form-input.invalid {
+  border-color: #e74c3c;
+}
+
+.form-input::placeholder {
+  color: #bdc3c7;
+}
+
+/* Checkbox Styling */
+.remember-group {
+  margin: 20px 0;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  padding-left: 30px;
+  user-select: none;
+}
+
+.checkbox-option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 2px solid #bdc3c7;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.checkbox-option:hover .checkmark {
+  border-color: #666;
+}
+
+.checkbox-option input:checked ~ .checkmark {
+  background-color: #666;
+  border-color: #666;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-option input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-label {
+  margin-left: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #999;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #666;
+}
+
+.submit-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* Footer Links */
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.auth-link {
+  color: #717fe0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.forgot-link {
+  color: #717fe0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Error Messages */
+.error-message {
+  color: #e53935;
+  font-size: 13px;
+  margin-top: 5px;
+  height: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .auth-form {
+    padding: 30px 20px;
+  }
+  
+  .form-title {
+    font-size: 24px;
+  }
+}

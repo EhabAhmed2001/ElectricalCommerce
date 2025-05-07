@@ -1,1 +1,70 @@
-<p>register works!</p>
+<form [formGroup]="FrmValidation" (ngSubmit)="onSubmit()" class="ecom-form">
+  <h2 class="form-title">Create Account</h2>
+
+  <div class="form-group">
+    <input type="text" placeholder="Username" formControlName="UserName" class="form-input">
+    <div class="error-message" *ngIf="FrmValidation.get('UserName')?.touched && FrmValidation.get('UserName')?.invalid">
+      <small *ngIf="FrmValidation.get('UserName')?.errors?.['required']">Username is required</small>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <input type="text" placeholder="First Name" formControlName="FirstName" class="form-input">
+      <div class="error-message" *ngIf="FrmValidation.get('FirstName')?.touched && FrmValidation.get('FirstName')?.invalid">
+        <small *ngIf="FrmValidation.get('FirstName')?.errors?.['required']">First name is required</small>
+        <small *ngIf="FrmValidation.get('FirstName')?.errors?.['pattern']">Invalid first name</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="text" placeholder="Last Name" formControlName="LastName" class="form-input">
+      <div class="error-message" *ngIf="FrmValidation.get('LastName')?.touched && FrmValidation.get('LastName')?.invalid">
+        <small *ngIf="FrmValidation.get('LastName')?.errors?.['required']">Last name is required</small>
+        <small *ngIf="FrmValidation.get('LastName')?.errors?.['pattern']">Invalid last name</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="email" placeholder="Email" formControlName="Email" class="form-input">
+    <div class="error-message" *ngIf="FrmValidation.get('Email')?.touched && FrmValidation.get('Email')?.invalid">
+      <small *ngIf="FrmValidation.get('Email')?.errors?.['required']">Email is required</small>
+      <small *ngIf="FrmValidation.get('Email')?.errors?.['pattern']">Invalid email</small>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <input type="password" placeholder="Password" formControlName="Password" class="form-input">
+      <div class="error-message" *ngIf="FrmValidation.get('Password')?.touched && FrmValidation.get('Password')?.invalid">
+        <small *ngIf="FrmValidation.get('Password')?.errors?.['required']">Password is required</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="password" placeholder="Confirm Password" formControlName="ConfirmPassword" class="form-input">
+      <div class="error-message" *ngIf="FrmValidation.get('ConfirmPassword')?.touched && FrmValidation.get('ConfirmPassword')?.invalid">
+        <small *ngIf="FrmValidation.get('ConfirmPassword')?.errors?.['required']">Confirm Password is required</small>
+      </div>
+      <div class="error-message" *ngIf="FrmValidation.hasError('passwordMismatch') && FrmValidation.get('ConfirmPassword')?.touched">
+        <small>Passwords do not match</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group radio-group">
+    <label class="radio-option">
+      <input type="radio" value="Customer" formControlName="Role"> 
+      <span class="radio-label">Customer</span>
+    </label>
+    <label class="radio-option">
+      <input type="radio" value="Seller" formControlName="Role"> 
+      <span class="radio-label">Seller</span>
+    </label>
+    <div class="error-message" *ngIf="FrmValidation.get('Role')?.touched && FrmValidation.get('Role')?.invalid">
+      <small *ngIf="FrmValidation.get('Role')?.errors?.['required']">Role is required</small>
+    </div>
+  </div>
+  <button type="submit" class="submit-btn">Register</button>
+</form>
