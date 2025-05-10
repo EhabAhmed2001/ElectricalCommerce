@@ -32,19 +32,11 @@
             ],
             "styles": [
           "node_modules/bootstrap/dist/css/bootstrap.min.css",
-          "node_modules/font-awesome/css/font-awesome.min.css",
+          "node_modules/material-design-iconic-font/dist/css/material-design-iconic-font.css",
           "src/styles.css"]
                 ,
-            "scripts": []
-
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/material-design-iconic-font/dist/css/material-design-iconic-font.css",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-
-            ],
-        
-
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
           },
           "configurations": {
             "production": {
