@@ -201,3 +201,36 @@
 .rating-option.active {
   background-color: #f5f5f5;
 }
+.slider-container {
+  position: relative;
+  width: 100%;
+}
+
+.price-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 6px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.bubble {
+  position: absolute;
+  top: -35px;
+  transform: translateX(-50%);
+  background-color: #717fe0;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: left 0.1s ease-in-out;
+  pointer-events: none;
+}
+
+.price-display {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}

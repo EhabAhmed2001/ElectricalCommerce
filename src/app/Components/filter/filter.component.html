@@ -1,22 +1,32 @@
 <div class="filters-container">
   <!-- Price Filter -->
-  <div class="filter-section">
-    <h3 class="filter-title">Price Range</h3>
-    <div class="price-range">
-      <div class="price-display">
-        <span class="min-price">{{minPrice}} L.E</span>
-        <span class="max-price">{{Price}} L.E</span>
-      </div>
+<div class="filter-section">
+  <h3 class="filter-title">Price Range</h3>
+  <div class="price-range">
+    <div class="price-display">
+      <span class="min-price">{{ minPrice }} L.E</span>
+      <span class="max-price">{{ Price }} L.E</span>
+    </div>
+
+    <div class="slider-container">
       <input 
         type="range" 
-        min="{{minPrice}}" 
-        max="{{Price}}" 
-        value="{{selectedPriceRange}}" 
+        [min]="minPrice" 
+        [max]="Price" 
+        [(ngModel)]="selectedPriceRange"
         class="price-slider"
-         (input)="onPriceChange($event)">
-      
+        (input)="onPriceChange($event)">
+
+      <div 
+        class="bubble" 
+        [style.left.%]="getBubblePosition()">
+        {{ selectedPriceRange }} L.E
+      </div>
     </div>
   </div>
+</div>
+
+
 
   <!-- Category Filter -->
   <div class="filter-section">

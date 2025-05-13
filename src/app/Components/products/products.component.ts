@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public itemsPerPage = 9;
   public totalItems = 0;
   public totalPages = 0;
-
+  
   private filterParams: {
     typeId?: number | null,
     brandId?: number | any,

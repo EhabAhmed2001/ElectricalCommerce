@@ -38,8 +38,7 @@ export class CategoryComponent implements OnInit {
   {
 this.filter.updateFilter({
     typeId: id,
-    brandId: 0,
-    price: 1000
+    
   });
     this.router.navigate(['/products']);
 }

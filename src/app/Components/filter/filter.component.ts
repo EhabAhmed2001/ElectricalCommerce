@@ -3,11 +3,15 @@ import { CatgoryService } from '../../Service/catgory.service';
 import { Catgoery, Brand } from '../../Interfaces/Catgory/CatgoryModel';
 import { BrandService } from '../../Service/brand.service';
 import { FilterService } from '../../Service/filter.service'; // استيراد خدمة الفلتر
+import { filter } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css']
+  styleUrls: ['./filter.component.css'],
+  imports:[FormsModule]
+
 })
 export class FilterComponent implements OnInit {
   element: Catgoery = {
@@ -22,7 +26,7 @@ export class FilterComponent implements OnInit {
   };
   Brands: Brand[] = [];
   
-  public minPrice: number = 100;
+  public minPrice: number = 10;
 public Price: number = 1000;
 
   selectedCategoryId: number |null=null;  
@@ -36,6 +40,9 @@ public Price: number = 1000;
   ) {}
 
   ngOnInit(): void {
+    this.selectedCategoryId = this.filterService.getCurrentFilter().typeId ?? null;
+  this.selectedBrandId = this.filterService.getCurrentFilter().brandId ?? null;
+  this.selectedPriceRange = this.filterService.getCurrentFilter().price ?? this.Price;
     this.service.getCatgory().subscribe(
       (data: Catgoery[]) => {
         this.categories = data;
@@ -103,5 +110,15 @@ restBrandFilter()
     });
 }
 
-
+getBubblePosition(): number {
+  const range = this.Price - this.minPrice;
+  const relativeValue = this.selectedPriceRange - this.minPrice;
+  const percent = (relativeValue / range) * 100;
+  return percent;
 }
+}
+
+
+
+
+

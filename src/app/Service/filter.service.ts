@@ -13,15 +13,15 @@ export class FilterService {
   }>({});
 
   // Method to update filter
-  updateFilter(params: {
-    typeId?: number | null,
-    brandId?: number | null,
-    price?: number|null,
- 
-  }) {
-    // Emit new filter parameters
-    this.filterSubject.next(params);
-  }
+ updateFilter(params: {
+  typeId?: number | null,
+  brandId?: number | null,
+  price?: number | null,
+}) {
+  const current = this.filterSubject.getValue();
+  const updated = { ...current, ...params };
+  this.filterSubject.next(updated);
+}
 
  
   getFilterObservable(): Observable<{
