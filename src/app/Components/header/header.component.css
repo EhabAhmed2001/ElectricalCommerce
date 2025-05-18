@@ -22,7 +22,6 @@
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
 /* ===== LOGO TRANSFORM ===== */
 .logo-hover-transform {
   transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
@@ -37,11 +36,19 @@
   position: relative;
   font-weight: 500;
   width: 100px;
-  /* padding: 0.5rem 1.7rem; */
   border-radius: 50px;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-align: center;
   border: 2px solid var(--primary);
+}
+
+/* Responsive adjustments for nav-swipe */
+@media (max-width: 991.98px) {
+  .nav-swipe {
+    width: 150px;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+  }
 }
 
 .nav-swipe::after {
@@ -113,7 +120,6 @@
 }
 
 .wishlist-btn:hover {
-  /* background: rgba(67, 97, 238, 0.1); */
   color: black;
 }
 .wishlist-btn:hover i {
@@ -134,9 +140,6 @@
 }
 
 /* ===== NOTIFICATION BADGES ===== */
-
-/* Notification Badge CSS Matching Image Style */
-
 .notification-badge {
   position: absolute;
   top: -8px;
@@ -156,14 +159,13 @@
 
 /* For the cart icon badge */
 .cart-btn .notification-badge {
-  background-color: #8a8dff; /* Matching the blue in your image */
+  background-color: #8a8dff;
 }
 
 /* For the wishlist icon badge */
 .wishlist-btn .notification-badge {
-  background-color: #8a8dff; /* Matching the blue in your image */
+  background-color: #8a8dff;
 }
-
 
 /* ===== AUTH BUTTONS ===== */
 .auth-btn {
@@ -187,12 +189,10 @@
 }
 
 .login-btn.active {
-  /* color: #6f7aee; */
   font-weight: 600;
   background: rgba(67, 97, 238, 0.1);
   color: var(--primary);
 }
-
 
 /* ===== USERNAME STYLING ===== */
 .username {
@@ -209,11 +209,42 @@
 
 .profile-btn.active .username {
   font-weight: bold;
-  /*color: var(--primary-dark); */
   color: black;
 }
 
 .profile-btn.active {
   color: black;
-  /* background: rgba(58, 12, 163, 0.1); */
+}
+
+/* ===== RESPONSIVE NAVBAR STYLING ===== */
+.navbar-toggler {
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.navbar-toggler:hover {
+  color: var(--primary-dark);
+}
+
+/* Adjustments for mobile layout */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  /* Centered nav items on mobile */
+  .navbar-nav {
+    text-align: center;
+  }
+
+  /* Icons container on mobile */
+  .navbar-collapse .d-flex {
+    margin-top: 0.5rem;
+  }
 }

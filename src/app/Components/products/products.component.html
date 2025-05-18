@@ -1,3 +1,5 @@
+<!-- products.component.html -->
+
 <!-- Loading Spinner -->
 @if(isLoading)
 {
@@ -6,8 +8,8 @@
   </div>
 }
 
-<!-- Product List -->
-<div class="product-grid">
+<!-- Product List or No Products Message -->
+<div *ngIf="products.length>0; else noProductsFound" class="product-grid">
   @for (p of products; track $index)
   {
     <div class="product-card">
@@ -34,7 +36,6 @@
           </a>
 
           <button class="wishlist-button">
-            <!-- <img src="Icons/icon-heart-01.png" alt="Add to wishlist" class="heart-icon"> -->
             <i class="bi fs-5 ms-3"
               [class.bi-heart]="!isInWishLit(p)"
               [class.bi-heart-fill]="isInWishLit(p)"
@@ -49,9 +50,21 @@
   }
 </div>
 
+<ng-template #noProductsFound>
+  <div class="no-products-container">
+    <div class="no-products-message">
+      <!-- Empty state icon -->
+      <i class="zmdi zmdi-shopping-basket no-products-icon"></i>
+
+      <!-- Title and message -->
+      <h2 class="no-products-title">No Products Found</h2>
+      <p class="no-products-text">We couldn't find any products that match your current filter criteria.</p>
+    </div>
+  </div>
+</ng-template>
 
 <!-- Pagination -->
-<div class="pagination-controls">
+<div *ngIf="products.length > 0" class="pagination-controls">
   <button (click)="goToPage(1)" [disabled]="currentPage === 1">First</button>
   <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
 
@@ -62,7 +75,6 @@
 
   <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
   <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">Last</button>
-
 
   <div class="page-info">
     Page {{ currentPage }} of {{ totalPages }} ({{ totalItems }} items total)
