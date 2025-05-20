@@ -20,23 +20,26 @@
   border-radius: 12px;
   overflow: hidden;
   display: flex;
-  justify-content: center;
-  align-items: flex-start; 
-  box-shadow: 
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Changed from flex-start to center vertically */
+  box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.08),
     0 2px 4px rgba(0, 0, 0, 0.05),
     0 0 0 1px rgba(0, 0, 0, 0.02);
   aspect-ratio: 1/1;
-  height: 400px; 
+  height: 400px;
   padding: 20px;
+  position: relative; /* Added for better positioning control */
 }
 
 .product-image img {
   max-width: 80%;
+  max-height: 80%; /* Added to maintain proportions */
+  width: auto; /* Changed from fixed width */
   height: auto;
   object-fit: contain;
-  align-self: center; 
-  margin-left: 50px;
+  margin: 0 auto; /* Removed the 50px offset */
+  display: block; /* Ensures proper centering */
 }
 
 /* Product Details */
@@ -199,15 +202,15 @@
     flex-direction: column;
     gap: 30px;
   }
-  
+
   .product-image {
     min-width: auto;
   }
-  
+
   .tab-nav {
     flex-direction: column;
   }
-  
+
   .tab-nav li.active a::after {
     width: 3px;
     height: 100%;

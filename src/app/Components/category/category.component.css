@@ -69,6 +69,7 @@
 
 .category-box:hover {
   transform: translateY(-5px);
+  cursor: pointer;
 }
 
 .category-box img {
