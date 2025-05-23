@@ -3,49 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <title>ElectroZone - About Us</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007BFF;
+            --secondary-color: #00C9A7;
+            --accent-color: #FF6B6B;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --background-color: #e6f0f9;
+            --card-color: #ffffff;
+            --text-color: #333;
+            --text-light: #6c757d;
+            --box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ece9e6 0%, #ffffff 50%, #717fe0 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: var(--card-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            position: relative;
+        }
+
+        header {
+            background-color: var(--card-color);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 60px 40px;
+            gap: 40px;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        h1.custom-heading {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: var(--dark-color);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1.custom-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .team-section {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .member {
+            background-color: var(--card-color);
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease-in-out;
+            color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            transition: var(--transition);
+        }
+
+        .member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            background-color: #ece9e6;
+        }
+
+        .member:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .dot:hover {
+            transform: scale(1.1) rotate(180deg);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .about-section {
+                padding: 50px 30px;
+            }
+
+            .about-content {
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .wrapper {
+                margin: 20px;
+                border-radius: 15px;
+            }
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .about-section {
+                padding: 40px 20px;
+                flex-direction: column;
+            }
+
+            .team-members {
+                gap: 1rem;
+            }
+
+            .member {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrapper {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            header {
+                padding: 10px 15px;
+            }
+
+            .about-section {
+                padding: 30px 15px;
+            }
+
+            h1.custom-heading {
+                margin-bottom: 20px;
+            }
+
+            .about-content p {
+                font-size: 1rem;
+            }
+
+            .team-section {
+                padding: 3rem 1rem;
+            }
+
+            .member {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
-        <header >
-           
-            
-            <p class="logo" >⚡ ElectroZone</p>
-            
-            
+        <header>
+            <p class="logo fade-in">⚡ ElectroZone</p>
         </header>
-        
+
         <div class="about-section">
-            <div class="about-content">
-<h1 class="custom-heading">Nice to meet you</h1>
-                <p>We’re Shorouk, Rahma, Heba, Ehab, and Aliaa — a team
- of aspiring developers who came together with one goal: 
- to build a smart, user-friendly platform for electronic devices.
-  The idea was born from a simple observation — there aren’t many
-   dedicated websites that make finding and exploring electronic products easy and
-    enjoyable. That’s where we saw an opportunity.</p>
+            <div class="about-content fade-in">
+                <h1 class="custom-heading">Nice to meet you</h1>
+                <p class="delay-1">We're Shrouk, Rahma, Heba, Ehab, and Alyaa — a team of aspiring developers who came together with one goal: to build a smart, user-friendly platform for electronic devices. The idea was born from a simple observation — there aren't many dedicated websites that make finding and exploring electronic products easy and enjoyable. That's where we saw an opportunity.</p>
             </div>
-            <div class="about-image">
-                <img src="img/1.avif" alt="Product" />
+            <div class="about-image fade-in delay-2">
+                <img src="img/1.avif" alt="Electronics Team" />
             </div>
         </div>
-        
-     <div class="team-section">
-<h2 class="section-title">Our Team</h2>
-  <div class="team-members">
-    <div class="member">Shorouk</div>
-    <div class="member">Rahma</div>
-    <div class="member">Heba</div>
-    <div class="member">Ehab</div>
-    <div class="member">Aliaa</div>
-  </div>
-</div>
 
-
-        
-        
+        <div class="team-section">
+            <h2 class="section-title fade-in">Our Team</h2>
+            <div class="team-members">
+                <div class="member fade-in delay-1">Shrouk</div>
+                <div class="member fade-in delay-1">Rahma</div>
+                <div class="member fade-in delay-2">Heba</div>
+                <div class="member fade-in delay-2">Ehab</div>
+                <div class="member fade-in delay-3">Alyaa</div>
+            </div>
+        </div>
     </div>
-    
-    <div class="dot"></div>
+
+    <div class="dot" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+
+    <script>
+        // Simple script to add scroll animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            fadeElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>

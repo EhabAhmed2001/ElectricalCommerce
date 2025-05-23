@@ -1,4 +1,4 @@
-import { Component, OnInit, signal , AfterViewInit ,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core'; 
+import { Component, OnInit, signal , AfterViewInit ,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { ActivatedRoute ,Router} from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { environment } from '../../../environments/enviroment';
@@ -23,13 +23,13 @@ import { CartItems } from '../../Interfaces/Cart/Cart.models';
 })
 
 
-export class ProductDetailsComponent  implements OnInit  
+export class ProductDetailsComponent  implements OnInit
 {
 
-  
-public products: Product[] = []; // Initialize as empty array    
 
-  
+public products: Product[] = []; // Initialize as empty array
+
+
 selectedTab: 'description' | 'info' = 'description';
 product:Product=
 {
@@ -71,7 +71,7 @@ plus()
 constructor(private service:ProductService  ,private route:Router, private router: ActivatedRoute, private cartWishingService: CartWishingDataService, private cartService: CartService)
 {
 
-} 
+}
 ngOnInit(): void {
   const id = Number(this.router.snapshot.paramMap.get('id'));
   if (id) {
@@ -95,8 +95,6 @@ this.service.getProductsByType(this.product.typeId).subscribe((res: any) => {
       ''
     )
   }));
-
-  console.log(this.products);
 });
 
   })
@@ -153,8 +151,8 @@ this.service.getProductsByType(this.product.typeId).subscribe((res: any) => {
   this.route.navigate([`/products/${id}`]);
 
   }
-  
-  
+
+
 }
 
 

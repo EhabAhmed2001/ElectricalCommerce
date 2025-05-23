@@ -12,11 +12,12 @@ import { WishinglistService } from '../../Service/wishinglist.service';
 import { AuthService } from '../../Service/auth.service';
 import { CartService } from '../../Service/cart.service';
 import { CartItems } from '../../Interfaces/Cart/Cart.models';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [RouterModule, FormsModule],
+  imports: [RouterModule, FormsModule, CommonModule],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })

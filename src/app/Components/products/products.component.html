@@ -1,57 +1,69 @@
+<!-- products.component.html -->
+
 <!-- Loading Spinner -->
-@if(isLoading)
-{
+@if(isLoading) {
   <div class="loading-overlay">
     <div class="spinner"></div>
   </div>
 }
 
-<!-- Product List -->
-<div class="product-grid">
-  @for (p of products; track $index)
-  {
-    <div class="product-card">
+<!-- Product List or No Products Message -->
+<div class="products-container">
+  <div *ngIf="products.length > 0; else noProductsFound" class="product-grid">
+    @for (p of products; track $index) {
+      <div class="product-card">
+        <!-- Product Image with Quick view -->
+        <div class="product-image-container">
+          <img src="{{p.pictureUrl}}" alt="{{p.name}}" class="product-image">
+          <!-- Quick View Button (shown on hover) -->
+          <a routerLink="/products/{{p.id}}" class="quick-view-btn">Quick View</a>
+        </div>
 
-      <!-- Product Image with Quick view -->
-      <div class="product-image-container">
-        <img src="{{p.pictureUrl}}" alt="{{p.name}}" class="product-image">
-
-        <!-- Quick View Button (shown on hover) -->
-        <a routerLink="/products/{{p.id}}" class="quick-view-btn">Quick View</a>
-      </div>
-
-      <!-- Product Details -->
-      <div class="product-details">
-        <div class="text-details">
+        <!-- Product Details -->
+        <div class="product-details">
           <h3>
-            <a routerLink="/products/{{p.id}}" class="product-name"> {{ p.name }} </a>
+            <a routerLink="/products/{{p.id}}" class="product-name">{{ p.name }}</a>
           </h3>
 
-          <span class="product-price">{{ p.price }} L.E</span>
+          <div class="product-actions">
+            <span class="product-price">{{ p.price }} L.E</span>
 
-          <a class="icon-link nav-click position-relative">
-            <i class="zmdi zmdi-shopping-cart fs-5" (click)="addProductToCart(p)"></i>
-          </a>
+            <div class="action-buttons">
+              <button class="icon-link nav-click" aria-label="Add to cart">
+                <i class="zmdi zmdi-shopping-cart fs-5 me-2" (click)="addProductToCart(p)"></i>
+              </button>
 
-          <button class="wishlist-button">
-            <!-- <img src="Icons/icon-heart-01.png" alt="Add to wishlist" class="heart-icon"> -->
-            <i class="bi fs-5 ms-3"
-              [class.bi-heart]="!isInWishLit(p)"
-              [class.bi-heart-fill]="isInWishLit(p)"
-              [class.text-danger]="isInWishLit(p)"
-              (click)="toggleWishlist(p)">
-            </i>
-          </button>
+              <button class="wishlist-button" aria-label="Add to wishlist">
+                <i class="bi fs-5"
+                  [class.bi-heart]="!isInWishLit(p)"
+                  [class.bi-heart-fill]="isInWishLit(p)"
+                  [class.text-danger]="isInWishLit(p)"
+                  (click)="toggleWishlist(p)">
+                </i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-
-    </div>
-  }
+    }
+  </div>
 </div>
 
+<ng-template #noProductsFound>
+  <div class="no-products-container">
+    <div class="no-products-message">
+      <!-- Empty state icon -->
+      <i class="zmdi zmdi-shopping-basket no-products-icon"></i>
+
+      <!-- Title and message -->
+      <h2 class="no-products-title">No Products Found</h2>
+      <p class="no-products-text">We couldn't find any products that match your current filter criteria.</p>
+    </div>
+  </div>
+</ng-template>
 
 <!-- Pagination -->
-<div class="pagination-controls">
+<div *ngIf="products.length > 0" class="pagination-controls">
   <button (click)="goToPage(1)" [disabled]="currentPage === 1">First</button>
   <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
 
@@ -63,8 +75,6 @@
   <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
   <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">Last</button>
 
-
   <div class="page-info">
     Page {{ currentPage }} of {{ totalPages }} ({{ totalItems }} items total)
   </div>
-</div>

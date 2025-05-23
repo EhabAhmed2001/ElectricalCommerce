@@ -8,7 +8,7 @@
         <span class="min-price">{{ minPrice }} L.E</span>
         <span class="max-price">{{ Price }} L.E</span>
       </div>
- 
+
       <div class="slider-container">
         <input
           type="range"
@@ -17,7 +17,7 @@
           [(ngModel)]="selectedPriceRange"
           class="price-slider"
           (input)="onPriceChange($event)">
- 
+
         <div
           class="bubble"
           [style.left.%]="getBubblePosition()">

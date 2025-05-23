@@ -9,5 +9,5 @@ import { ProductsComponent } from "../products/products.component";
   styleUrl: './shop.component.css'
 })
 export class ShopComponent {
-
 }
+

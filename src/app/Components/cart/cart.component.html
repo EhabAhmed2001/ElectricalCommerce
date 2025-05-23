@@ -15,7 +15,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb m-0">
           <li class="breadcrumb-item">
-            <a routerLink="/" class="text-decoration-none text-primary">Home</a>
+            <a routerLink="/">Home</a>
           </li>
           <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
         </ol>
@@ -27,9 +27,9 @@
       <div class="col-lg-8">
         <div class="bg-white p-4 rounded shadow-sm">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="mb-0 fw-bold text-primary">
+            <h4 class="mb-0 fw-bold">
               <i class="bi bi-cart3 me-2"></i>Your Cart
-              <span class="badge bg-primary rounded-pill ms-2">{{Cart.items.length}} items</span>
+              <span class="badge bg-secondary rounded-pill ms-2">{{Cart.items.length}} items</span>
             </h4>
             <button class="btn btn-sm btn-outline-danger" (click)="ClearCart()">
               <i class="bi bi-trash"></i> Clear Cart
@@ -86,8 +86,8 @@
 
       <!-- Order Summary -->
       <div class="col-lg-4">
-        <div class="bg-white p-4 rounded shadow-sm sticky-top" style="top: 20px;">
-          <h4 class="mb-4 fw-bold text-primary border-bottom pb-3">Order Summary</h4>
+        <div class="bg-white p-4 rounded shadow-sm sticky-top" style="background: linear-gradient(135deg, #ece9e6, #ffffff);top: 20px;">
+          <h4 class="mb-4 fw-bold border-bottom pb-3">Order Summary</h4>
 
           <div class="mb-3">
             <div class="d-flex justify-content-between mb-2">
@@ -102,23 +102,23 @@
                   {{x.to}} (${{x.price | number:'1.2-2'}})
                 </option>
               </select>
-              <button class="btn btn-sm btn-outline-primary mt-2 w-100" (click)="UpdateTotals()">
+              <button class="btn btn-sm mt-2 w-100" style="color: #717fe0; font-weight: bold;" (click)="UpdateTotals()">
                 Update Shipping
               </button>
             </div>
 
             <div class="d-flex justify-content-between border-top pt-3 mt-3">
               <span class="fw-bold">Total:</span>
-              <span class="text-primary fw-bold fs-5">${{Total | number:'1.2-2'}}</span>
+              <span class="fw-bold fs-5">${{Total | number:'1.2-2'}}</span>
             </div>
           </div>
 
-          <button class="btn btn-primary w-100 py-3 rounded-pill fw-bold mt-3" routerLink="/checkout">
+          <button class="btn w-100 py-3 rounded-pill fw-bold mt-3" style="background: linear-gradient(135deg, #ece9e6, #ffffff);" routerLink="/checkout">
             <i class="bi bi-lock-fill me-2"></i> Proceed to Checkout
           </button>
 
           <div class="text-center mt-3">
-            <a routerLink="/products" class="text-decoration-none text-primary">
+            <a routerLink="/products" class="text-decoration-none">
               <i class="bi bi-arrow-left me-1"></i> Continue Shopping
             </a>
           </div>
