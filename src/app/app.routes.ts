@@ -15,6 +15,7 @@ import { DashboardLoginComponent } from './Components/dashboard/dashboard-login/
 import { DashboardOrdersComponent } from './Components/dashboard/dashboard-orders/dashboard-orders.component';
 import { LoginComponent } from './Components/login/login.component';
 import { DashboardProductComponent } from './Components/dashboard/dashboard-product/dashboard-product.component';
+import { authAdminGuard } from './Guards/auth-admin.guard';
 
 export const routes: Routes = [
   {
@@ -46,13 +47,13 @@ export const routes: Routes = [
     component: DashboardComponent,
     children: [
       { path: "", redirectTo: "orders", pathMatch: 'full' },
-      { path: "login", component: DashboardLoginComponent, title: 'Login' },
-      { path: "orders", component: DashboardOrdersComponent, title: 'All Orders' },
-      { path: "products", component: DashboardProductComponent, title: 'Products' },
-      { path: "brands", component: BrandsComponent, title: 'Brands' },
-      { path: "types", component: TypesComponent, title: 'Types' },
-      { path: "users", component: UsersComponent, title: 'Users' },
-      { path: "create-admin", component: CreateAdminComponent, title: 'Add Admin' },
+     // { path: "login", component: DashboardLoginComponent, title: 'Login' },
+      { path: "orders", component: DashboardOrdersComponent, title: 'All Orders' , canActivate: [authAdminGuard] },
+      { path: "products", component: DashboardProductComponent, title: 'Products', canActivate: [authAdminGuard]  },
+      { path: "brands", component: BrandsComponent, title: 'Brands', canActivate: [authAdminGuard]  },
+      { path: "types", component: TypesComponent, title: 'Types', canActivate: [authAdminGuard]  },
+      { path: "users", component: UsersComponent, title: 'Users', canActivate: [authAdminGuard]  },
+      { path: "create-admin", component: CreateAdminComponent, title: 'Add Admin' , canActivate: [authAdminGuard] },
     ]
   },
   {

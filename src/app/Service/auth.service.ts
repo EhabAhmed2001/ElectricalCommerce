@@ -49,11 +49,13 @@ export class AuthService  {
         }
       })
     );
-
   }
+
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
+    localStorage.removeItem('role');
+
     this.isLoggIn.next(false) ;                   
   }
   isLoggedIn(): boolean {
@@ -65,6 +67,14 @@ export class AuthService  {
   }
   GetUserRole():string{
     return  localStorage.getItem('role')||"";
+  }
+  public IsAdmin():boolean{
+    const role= localStorage.getItem('role')||""
+    return role === 'Admin'
+  }
+    public IsCustomer():boolean{
+    const role= localStorage.getItem('role')||""
+    return role === 'Customer'
   }
   public IsAuthenticated(): boolean {
     if (!this.isLoggIn.value) {
