@@ -18,9 +18,12 @@
                                 [class.active]="i === 0">
                                 <div class="position-relative">
                                     <!-- Improved Image with Fallback and Loading State -->
-                                    <div class="ratio ratio-16x9 bg-light">
-                                        <img [src]="item.pictureUrl" class="d-block w-100 object-fit-cover"
-                                            alt="{{item.productName || 'Product image'}}" onerror="this.src='';"
+
+                                    <div class="product-image bg-white" style="height: 250px; display: flex; align-items: center; justify-content: center;">
+                                        <img [src]="item.pictureUrl" class="d-block img-fluid mh-100 mw-100"
+                                            style="max-height: 250px; object-fit: contain;"
+                                            alt="{{item.productName || 'Product image'}}"
+                                            onerror="this.src='https://via.placeholder.com/800x450?text=Product+Image';"
                                             loading="lazy" />
                                     </div>
 
