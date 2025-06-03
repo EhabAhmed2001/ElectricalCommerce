@@ -1,1 +1,279 @@
-<p>dashboard-product works!</p>
+<!-- Loading Spinner -->
+@if(isLoading) {
+  <div class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+}
+
+<!-- Product Table -->
+<div class="products-container">
+  @if(products.length > 0) {
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Brand</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of products; track trackByProductId($index, p)) {
+          <tr>
+            <td>
+              <img [src]="p.pictureUrl || 'assets/placeholder.png'"
+                  class="img-thumbnail" width="100">
+            </td>
+            <td>
+              <a style="text-decoration:none; color:#302f37;" class="product-name">{{ p.name }}</a>
+            </td>
+            <td>
+              <div class="product-description">{{ p.description }}</div>
+            </td>
+            <td>{{ getBrandName(p.brandId) }}</td>
+            <td>{{ getTypeName(p.typeId) }}</td>
+            <td>{{ p.price | currency:'L.E ' }}</td>
+            <td class="action-buttons">
+              <button class="btn btn-primary btn-sm me-2" (click)="openEditModal(p)">
+                <i class="bi bi-pencil"></i> Edit
+              </button>
+              <button class="btn btn-danger btn-sm me-2" (click)="openDeleteModal(p)">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+              <button class="btn btn-info btn-sm" (click)="openViewModal(p)">
+                <i class="bi bi-eye"></i> View
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <div class="no-products-container">
+      <div class="no-products-message">
+        <i class="zmdi zmdi-shopping-basket no-products-icon"></i>
+        <h2 class="no-products-title">No Products Available</h2>
+        <p class="no-products-text">There are currently no products in the system.</p>
+      </div>
+    </div>
+  }
+</div>
+
+<!-- Pagination -->
+@if(products.length > 0) {
+  <div class="pagination-controls">
+    <button (click)="goToPage(1)" [disabled]="currentPage === 1" class="btn btn-outline-primary">
+      First
+    </button>
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="btn btn-outline-primary">
+      Previous
+    </button>
+
+    @for (page of getPages(); track page) {
+      <button (click)="goToPage(page)"
+              [class.active]="page === currentPage"
+              class="btn btn-outline-primary page-number">
+        {{ page }}
+      </button>
+    }
+
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="btn btn-outline-primary">
+      Next
+    </button>
+    <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages" class="btn btn-outline-primary">
+      Last
+    </button>
+
+    <div class="page-info">
+      Page {{ currentPage }} of {{ totalPages }} ({{ totalItems }} items total)
+    </div>
+  </div>
+}
+
+<!-- Edit Modal -->
+@if(showEditModal) {
+<div class="modal fade show d-block" tabindex="-1" role="dialog" [ngStyle]="{'background': 'rgba(0,0,0,0.5)'}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Product</h5>
+        <button type="button" class="btn-close" (click)="closeEditModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Name*</label>
+            <input type="text" class="form-control"
+                   [(ngModel)]="selectedProduct.name"
+                   name="productName"
+                   required
+                   #name="ngModel">
+            @if(name.invalid && (name.dirty || name.touched)) {
+              <div class="text-danger">Name is required</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description*</label>
+            <textarea class="form-control"
+                      [(ngModel)]="selectedProduct.description"
+                      name="productDescription"
+                      required
+                      #description="ngModel"></textarea>
+            @if(description.invalid && (description.dirty || description.touched)) {
+              <div class="text-danger">Description is required</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Price*</label>
+            <input type="number" class="form-control"
+                   [(ngModel)]="selectedProduct.price"
+                   name="productPrice"
+                   required
+                   min="0.01"
+                   step="0.01"
+                   #price="ngModel">
+            @if(price.invalid && (price.dirty || price.touched)) {
+              <div class="text-danger">Valid price is required</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Brand*</label>
+            <select class="form-control"
+                    [(ngModel)]="selectedProduct.brandId"
+                    name="productBrand"
+                    required
+                    #brand="ngModel">
+              <option value="">Select Brand</option>
+              @for (brand of brands; track brand.id) {
+                <option [value]="brand.id">{{brand.name}}</option>
+              }
+            </select>
+            @if(brand.invalid && (brand.dirty || brand.touched)) {
+              <div class="text-danger">Brand is required</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Type*</label>
+            <select class="form-control"
+                    [(ngModel)]="selectedProduct.typeId"
+                    name="productType"
+                    required
+                    #type="ngModel">
+              <option value="">Select Type</option>
+              @for (type of types; track type.id) {
+                <option [value]="type.id">{{type.name}}</option>
+              }
+            </select>
+            @if(type.invalid && (type.dirty || type.touched)) {
+              <div class="text-danger">Type is required</div>
+            }
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Image*</label>
+            <input type="file" class="form-control"
+                   accept="image/*"
+                   (change)="onFileSelected($event)"
+                   #fileInput>
+            @if(!selectedProduct.pictureUrl && !selectedFile) {
+              <div class="text-danger">Image is required</div>
+            }
+            @if(selectedProduct.pictureUrl) {
+              <img [src]="selectedProduct.pictureUrl" class="img-thumbnail mt-2" width="100">
+            }
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="saveProduct()" [disabled]="saving || editForm.invalid">
+          @if(!saving) {
+            <span>Save Changes</span>
+          } @else {
+            <i class="fas fa-circle-notch fa-spin"></i> Saving...
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- Delete Confirmation Modal -->
+@if(showDeleteModal) {
+<div class="modal fade show d-block" tabindex="-1" role="dialog" [ngStyle]="{'background': 'rgba(0,0,0,0.5)'}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Product Deletion</h5>
+        <button type="button" class="btn-close" (click)="closeDeleteModal()"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong>{{selectedProduct.name}}</strong>?</p>
+        <p class="text-danger">This action cannot be undone and will remove all associated data.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()" [disabled]="deleting">
+          @if(!deleting) {
+            <span>Delete</span>
+          } @else {
+            <i class="fas fa-circle-notch fa-spin"></i> Deleting...
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- View Modal -->
+@if(showViewModal) {
+<div class="modal fade show d-block" tabindex="-1" role="dialog" [ngStyle]="{'background': 'rgba(0,0,0,0.5)'}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Product Details</h5>
+        <button type="button" class="btn-close" (click)="closeViewModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-3">
+          <div class="col-md-4 fw-bold">ID:</div>
+          <div class="col-md-8">{{selectedProduct.id}}</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 fw-bold">Name:</div>
+          <div class="col-md-8">{{selectedProduct.name}}</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 fw-bold">Description:</div>
+          <div class="col-md-8">{{selectedProduct.description}}</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 fw-bold">Price:</div>
+          <div class="col-md-8">{{selectedProduct.price | currency:'L.E '}}</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 fw-bold">Brand:</div>
+          <div class="col-md-8">{{getBrandName(selectedProduct.brandId)}}</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 fw-bold">Type:</div>
+          <div class="col-md-8">{{getTypeName(selectedProduct.typeId)}}</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-4 fw-bold">Image:</div>
+          <div class="col-md-8">
+            <img [src]="selectedProduct.pictureUrl || 'assets/placeholder.png'" class="img-thumbnail" width="100">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeViewModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+}
